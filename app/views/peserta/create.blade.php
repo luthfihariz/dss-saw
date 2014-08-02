@@ -1,4 +1,4 @@
-	@extends('layout')
+@extends('layout')
 @section('content')
 <?php
 	$jenisKelamin = unserialize(JENIS_KELAMIN);

@@ -10,7 +10,7 @@
 	$jumlah = 0;
 ?>
 <section class="content-header">
-	<h1>Detail Peserta</h1>
+	<h1>Detail Peserta<small><a href="{{URL::to('peserta/'.$peserta->id.'/edit')}}">Edit</a></small></h1>
 </section>
 <section class="content">
 	<div class="row">
@@ -120,11 +120,13 @@
 					<div class="form-group">
 						<label>Jenis Program</label>
 						<p class="form-control-static">{{ $fullday[$peserta->fullday] }}</p>
-					</div>				
+					</div>
+					@if($peserta->fullday)
 					<div class="form-group">
 						<label>Hasil Wawancara</label>
 						<p class="form-control-static">{{ $hasil_wawancara }}</p>
 					</div>
+					@endif
 					<div class="form-group">
 						<label>Hasil Test</label>
 						<p class="form-control-static">{{ $hasil_test }}</p>

@@ -6,12 +6,14 @@ class PesertaTableSeeder extends Seeder{
 	public function run()
 	{
 		DB::table('peserta')->delete();
+		
+		$max_peserta = 800;
 
-		for ($i=0; $i < 10; $i++) { 			
+		for ($i=0; $i < $max_peserta; $i++) { 			
 			$peserta = new Peserta();
 			$peserta->nama = 'Siswa Koplak '.$i;
 			$peserta->agama = 'Islam';
-			$peserta->ttl = '';
+			$peserta->ttl = 'Bogor, 27 Nov 2005';
 			$peserta->anak_ke = rand(1,15);
 			$peserta->jumlah_saudara = $peserta->anak_ke + rand(0,5);
 			$peserta->jenis_kelamin = rand(0,1);
@@ -22,8 +24,24 @@ class PesertaTableSeeder extends Seeder{
 			$peserta->kab_kota = 'Brebes';
 			$peserta->nama_sekolah_asal = 'SD Asal Asalan';
 			$peserta->alamat_sekolah_asal = 'Jl. Asal asalan';
+			$peserta->jenis_sekolah_asal = rand(0,1);
 			$peserta->nisn_sekolah_asal = 'NISN00123511';
+			$peserta->fullday = rand(0,1);
+			$peserta->rank = 0;
 			$peserta->save();
+
+			if($peserta->fullday)
+			{
+				$wawancara = new HasilWawancara();
+				$wawancara->peserta_id = $peserta->id;
+				$wawancara->nilai = rand(65,85);
+				$wawancara->save();
+			}
+
+			$test = new HasilTest();
+			$test->peserta_id = $peserta->id;
+			$test->nilai = rand(65,90);
+			$test->save();
 
 			$ortu = new OrangTua();
 			$ortu->peserta_id = $peserta->id;
@@ -75,7 +93,7 @@ class PesertaTableSeeder extends Seeder{
 				$prestasi->jenis = $jenisPrestasi[rand(0,2)];
 				$tingkat = rand(0,3);
 				$prestasi->tingkat = $tingkat;
-				$prestasi->jumlah = ($tingkat+1) * 25;
+				$prestasi->jumlah = ($tingkat+1) * 5;
 				$prestasi->save();
 			}
 		}

@@ -10,6 +10,7 @@
         <link href="{{ URL::to('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />        
         <!-- Theme style -->
         <link href="{{ URL::to('css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
+        
 
            <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -19,13 +20,8 @@
         <script src="{{ URL::to('js/bootstrap.min.js') }}" type="text/javascript"></script>        
 
         <!-- AdminLTE App -->
-        <script src="{{ URL::to('js/AdminLTE/app.js') }}" type="text/javascript"></script>
-        
-        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="{{ URL::to('js/AdminLTE/dashboard.js') }}" type="text/javascript"></script>     
-        
-        <!-- AdminLTE for demo purposes -->
-        <script src="{{ URL::to('js/AdminLTE/demo.js') }}" type="text/javascript"></script>
+        <script src="{{ URL::to('js/AdminLTE/app.js') }}" type="text/javascript"></script>    
+            
         
     </head>
     <body class="skin-blue">
@@ -47,44 +43,18 @@
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">                                               
                         
+
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="">
                                 <i class="glyphicon glyphicon-user"></i>
-                                <span>Jane Doe <i class="caret"></i></span>
+                                <span> {{ Auth::user()->username }}
+
+                                </span>
+                                
                             </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header bg-light-blue">
-                                    <img src="img/avatar3.png" class="img-circle" alt="User Image" />
-                                    <p>
-                                        Jane Doe - Web Developer
-                                        <small>Member since Nov. 2012</small>
-                                    </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <li class="user-body">
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
-                                </li>
-                            </ul>
                         </li>
+                        <li><a href="{{ URL::to('logout') }}"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
                     </ul>
                 </div>
             </nav>
@@ -96,9 +66,9 @@
                 <section class="sidebar">
                     
                     <!-- search form -->
-                    <form action="#" method="get" class="sidebar-form">
+                    <form action="{{ URL::to('search') }}" method="post" class="sidebar-form">
                         <div class="input-group">
-                            <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                            <input type="text" name="q" class="form-control" placeholder="Kode Peserta"/>
                             <span class="input-group-btn">
                                 <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
                             </span>

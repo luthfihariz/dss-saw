@@ -12,6 +12,7 @@ define('PENGHASILAN',serialize(array('< Rp 250.000','Rp 250.000 s.d Rp 500.000',
 define('TINGKAT_PRESTASI', serialize(array('Kecamatan','Kabupaten','Provinsi','Nasional')));
 define('PROGRAM',serialize(array('Reguler','Fullday')));
 define('JENIS_ASAL_SEKOLAH', serialize(array('MI','SD')));
+define('STATUS', serialize(array('Belum Dikalkulasi','Tidak Diterima','Diterima Reguler','Tidak Diterima Full Day','Diterima FullDay')));
 
 /*
 |--------------------------------------------------------------------------

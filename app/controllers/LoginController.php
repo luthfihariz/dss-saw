@@ -1,6 +1,6 @@
 <?php
 
-class DashboardController extends \BaseController {
+class LoginController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,21 +9,44 @@ class DashboardController extends \BaseController {
 	 */
 	public function index()
 	{
-		$peserta = Peserta::all();
-		$num_of_peserta = $peserta->count();		
-		$fullday = Peserta::where('fullday','=','1');
-		$num_of_fullday = $fullday->count();
-		
-		$fullday = $fullday->orderBy('rank','asc')->paginate(10);		
-		$reguler = Peserta::where('fullday','=','0')->orderBy('rank','asc')->paginate(10);
-		$reguler->getFactory()->setPageName('reguler');
-		return View::make('index')
-			->with('num_of_peserta',$num_of_peserta)
-			->with('num_of_fullday',$num_of_fullday)
-			->with('reguler', $reguler)
-			->with('fullday', $fullday);
+		if(Auth::check()) return Redirect::to('/');
+		return View::make('login.index');
 	}
 
+
+	public function doLogin()
+	{
+		$rules = array(
+			'username' => 'required|min:4',
+			'password' => 'required|min:4',
+		);
+
+		$validator = Validator::make(Input::all(), $rules);
+		if($validator->fails()){
+			return Redirect::to('login')
+					->withErrors($validator)
+					->withInput(Input::except('password'));
+		}else{
+			$userdata = array(
+				'username' => Input::get('username'),
+				'password' => Input::get('password')
+				);
+
+			if(Auth::attempt($userdata)){
+				return Redirect::intended('/');
+			}else{
+				return Redirect::to('login')
+						->withErrors(array('password' => 'Invalid username or password.'))
+						->withInput(Input::except('password'));
+			}
+		}
+	}
+
+	public function doLogout()
+	{
+		Auth::logout();
+		return Redirect::to('login');
+	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -32,7 +55,7 @@ class DashboardController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		
 	}
 
 
